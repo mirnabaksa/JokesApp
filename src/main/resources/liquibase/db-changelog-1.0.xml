@@ -1,0 +1,37 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+ 
+  <changeSet id="create_categories" author="mirna">
+    <createTable tableName="categories">
+      <column name="id" type="int">
+        <constraints primaryKey="true" nullable="false" />
+      </column>
+      <column name="name" type="varchar(50)">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+  </changeSet>
+ 
+  <changeSet id="create_jokes" author="mirna">
+    <createTable tableName="jokes">
+      <column name="id" type="int">
+        <constraints primaryKey="true" nullable="false" />
+      </column>
+      <column name="content" type="varchar(250)">
+        <constraints nullable="false" />
+      </column>
+      <column name="likes" type="int"/>
+	   <column name="dislikes" type="int"/>
+	   <column name="employee_id" type="int">
+            <constraints nullable="false" foreignKeyName="category_id" references="categories(id)"/>
+        </column>
+    </createTable>
+  </changeSet>
+ 
+  <changeSet id="tag-1.0" author="mirna">
+    <tagDatabase tag="1.0" />
+  </changeSet>
+ 
+</databaseChangeLog>
