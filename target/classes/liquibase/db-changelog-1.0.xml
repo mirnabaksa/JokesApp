@@ -24,7 +24,7 @@
       </column>
       <column name="likes" type="int"/>
 	   <column name="dislikes" type="int"/>
-	   <column name="employee_id" type="int">
+	   <column name="category_id" type="int">
             <constraints nullable="false" foreignKeyName="category_id" references="categories(id)"/>
         </column>
     </createTable>

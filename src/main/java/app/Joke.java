@@ -1,10 +1,16 @@
-package models;
+package app;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 
 @Entity
 @Table(name = "jokes")
@@ -12,9 +18,16 @@ public class Joke {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String content;
-	private int likes;
-	private int dislikes;
+	@NotNull
+	private String content = "";
+	@Value(value = "0")
+	private Integer likes;
+	@Value(value = "0")
+	private Integer dislikes;
+	
+	@ManyToOne
+    @JoinColumn(name = "category_id")	
+	private Category category;
 	
 	public Joke() {
 	}
@@ -56,6 +69,14 @@ public class Joke {
 
 	public void setDislikes(int dislikes) {
 		this.dislikes = dislikes;
+	}
+	
+	public Category getCategory() {
+		return category;
+	}
+	
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override

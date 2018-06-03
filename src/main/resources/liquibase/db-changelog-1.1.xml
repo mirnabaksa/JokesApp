@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+ 
+  <changeSet author="mirna" id="addAutoIncrement-jokeid">
+    <addAutoIncrement 
+            columnDataType="int"
+            columnName="id"
+            incrementBy="1"
+            startWith="1"
+            tableName="jokes"/>
+</changeSet>
+
+<changeSet author="mirna" id="addAutoIncrement-categoryid">
+    <addAutoIncrement 
+            columnDataType="int"
+            columnName="id"
+            incrementBy="1"
+            startWith="1"
+            tableName="categories"/>
+</changeSet>
+ 
+  <changeSet id="tag-1.0" author="mirna">
+    <tagDatabase tag="1.0" />
+  </changeSet>
+ 
+</databaseChangeLog>
