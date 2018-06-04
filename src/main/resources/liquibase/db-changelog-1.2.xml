@@ -1,0 +1,29 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+ 
+ <changeSet author="mirna" id="adddefault">
+    <addDefaultValue 
+            columnDataType="int"
+            columnName="likes"
+            defaultValueNumeric="0"
+            schemaName="public"
+            tableName="jokes"/>
+</changeSet>
+
+ <changeSet author="mirna" id="adddefaultdislikes">
+    <addDefaultValue 
+            columnDataType="int"
+            columnName="dislikes"
+            defaultValueNumeric="0"
+            schemaName="public"
+            tableName="jokes"/>
+</changeSet>
+  
+ 
+  <changeSet id="tag-1.0" author="mirna">
+    <tagDatabase tag="1.0" />
+  </changeSet>
+ 
+</databaseChangeLog>

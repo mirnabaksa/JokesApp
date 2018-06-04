@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Notes</title>
+    <title>Jokes</title>
 
     <link rel="stylesheet" type="text/css" media="all" href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 
@@ -20,16 +20,26 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
+                	<th> # </th>
                     <th>Category</th>
                     <th>Content</th>
+                    <th> Likes </th>
+                    <th> Dislikes </th>
+                    <th> Diff </th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="joke : ${jokes}">
-                    <td th:text="${joke.id}"/>
+                <tr th:each="joke, rows : ${jokes}">
+                    <td th:text="${rows.index + 1}"/>
                     <td th:text="${joke.category.name}"/>
                     <td th:text="${joke.content}"/>
+                    <td th:text="${joke.likes}"/>
+                    <td th:text="${joke.dislikes}"/>
+                    <td th:text="${joke.likes - joke.dislikes}"/>
+                    <td>
+                     	<a href="/like/1" th:href="@{/like/__${joke.id}__}">Like</a>
+                        <a href="/dislike/1" th:href="@{/dislike/__${joke.id}__}">Dislike</a>
+                     </td>
                 </tr>
             </tbody>
         </table>

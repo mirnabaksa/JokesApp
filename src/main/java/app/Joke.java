@@ -16,14 +16,12 @@ import org.springframework.context.annotation.Bean;
 @Table(name = "jokes")
 public class Joke {
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@NotNull
 	private String content = "";
-	@Value(value = "0")
-	private Integer likes;
-	@Value(value = "0")
-	private Integer dislikes;
+	private Integer likes = 0;
+	private Integer dislikes = 0;
 	
 	@ManyToOne
     @JoinColumn(name = "category_id")	
@@ -38,6 +36,18 @@ public class Joke {
 	}
 	
 	
+
+	public Joke(String content, Category category) {
+		this.content = content;
+		this.category = category;
+	}
+	
+	public void like() {
+		this.likes += 1;
+	}
+	public void dislike() {
+		this.dislikes += 1;
+	}
 
 	public int getId() {
 		return id;

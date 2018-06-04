@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Jokes</title>
+
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+
+        <h1>New Joke</h1>
+        
+        <form class = "form-group" action="#" th:action="@{/new}" th:object="${jokeForm}" method="post">
+        <table>
+                <tr>
+                    <td>Content:</td>
+                    <td><input type="text" th:field="*{content}" /></td>
+                    <td th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Content error</td>
+                </tr>
+                
+                  
+                <tr>
+                 <td>Select Category:</td>
+                <td>
+                    <select th:field="*{category}">
+                         <option value=""> -- </option>
+                         <option th:each="cat : ${categories}"
+                            th:value="${cat.id}"
+                            th:utext="${cat.name}"> </option>
+                  </select>
+ 
+                </td>
+                <td th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category Error</td>
+       
+                
+                    
+                </tr>
+                <tr>
+                    <td><button type="submit">Submit</button> <input type="reset" value="Reset" /></td>
+                </tr>
+                
+                <tr>
+                 <td> <a href="#" th:href="@{/}" class="btn btn-danger" role="button">Cancel</a> </td>
+                </tr>
+            </table>
+        
+
+    </div>
+
+</body>
+</html>
