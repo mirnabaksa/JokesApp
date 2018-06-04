@@ -48,6 +48,10 @@ public class Joke {
 	public void dislike() {
 		this.dislikes += 1;
 	}
+	
+	public int getDifference() {
+		return this.likes - this.dislikes;
+	}
 
 	public int getId() {
 		return id;

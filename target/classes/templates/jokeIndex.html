@@ -4,20 +4,16 @@
 <head>
     <meta charset="UTF-8" />
     <title>Jokes</title>
-
-    <link rel="stylesheet" type="text/css" media="all" href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
-
-    <script type="text/javascript" th:src="@{/js/jquery.min.js}" src="js/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}" src="js/bootstrap.min.js"></script>
+	 
+	<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 </head>
 <body>
 
-    <div class="container">
+<div class = "container">
+    <h1>Jokes</h1>
 
-        <h1>Jokes</h1>
-
-
-        <table class="table">
+	<div class ="table-responsive">
+        <table class="table table-striped">
             <thead>
                 <tr>
                 	<th> # </th>
@@ -30,7 +26,7 @@
             </thead>
             <tbody>
                 <tr th:each="joke, rows : ${jokes}">
-                    <td th:text="${rows.index + 1}"/>
+                 	<td th:text="${rows.index + 1}"/>
                     <td th:text="${joke.category.name}"/>
                     <td th:text="${joke.content}"/>
                     <td th:text="${joke.likes}"/>
@@ -43,6 +39,10 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+        
+        <h2><a href="/new">Add new joke</a></h2>
+     </div>
+ <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ </div>
 </body>
 </html>

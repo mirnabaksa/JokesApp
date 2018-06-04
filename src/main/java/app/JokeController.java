@@ -1,6 +1,10 @@
 package app;
 
 
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +28,8 @@ public class JokeController {
 	
 	@RequestMapping("/")
 	public String index(Model model) {
-		model.addAttribute("jokes", jokeRepository.findAll());
+		List<Joke> jokes = jokeRepository.findAll().stream().sorted((a,b) -> b.getDifference() - a.getDifference()).collect(Collectors.toList());
+		model.addAttribute("jokes", jokes);
 		return "jokeIndex";
 	}
 	
