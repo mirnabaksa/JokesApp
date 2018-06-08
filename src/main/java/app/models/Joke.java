@@ -1,4 +1,4 @@
-package app;
+package app.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,9 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 
 @Entity
 @Table(name = "jokes")
@@ -34,7 +31,6 @@ public class Joke {
 		this.id = id;
 		this.content = content;
 	}
-	
 	
 
 	public Joke(String content, Category category) {
@@ -92,6 +88,7 @@ public class Joke {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+	
 
 	@Override
 	public int hashCode() {

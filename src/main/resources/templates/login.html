@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Login</title>
+        
+        <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    </head>
+    <body>
+    <div class = "container">
+    	<h1>Login</h1>
+    	
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        
+        <form th:if="${param.logout == null}" th:action="@{/login}" method="post">
+            <div class="form-group"><label> User Name : <input type="text" class="form-control" name="username"/> </label></div>
+            <div class="form-group"><label> Password: <input type="password" class="form-control" name="password"/> </label></div>
+           <div class="form-group"><input type="submit" value="Sign In" class= "btn btn-submit"/></div>
+        </form>
+        
+        <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+     </div>
+    </body>
+</html>

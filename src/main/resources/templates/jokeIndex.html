@@ -1,48 +1,85 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>Jokes</title>
-	 
-	<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-</head>
-<body>
-
-<div class = "container">
-    <h1>Jokes</h1>
-
-	<div class ="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                	<th> # </th>
-                    <th>Category</th>
-                    <th>Content</th>
-                    <th> Likes </th>
-                    <th> Dislikes </th>
-                    <th> Diff </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="joke, rows : ${jokes}">
-                 	<td th:text="${rows.index + 1}"/>
-                    <td th:text="${joke.category.name}"/>
-                    <td th:text="${joke.content}"/>
-                    <td th:text="${joke.likes}"/>
-                    <td th:text="${joke.dislikes}"/>
-                    <td th:text="${joke.likes - joke.dislikes}"/>
-                    <td>
-                     	<a href="/like/1" th:href="@{/like/__${joke.id}__}">Like</a>
+   xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="UTF-8" />
+      <title>Jokes</title>
+      <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+   </head>
+   <body>
+      <div class = "container">
+         <h1>Jokes</h1>
+         
+         <div class="row">
+            <div class="col-md-8"><a href="#" th:href="@{/new}" class="btn btn-danger" role="button">Add new joke</a></div>
+            <div class="col-md-4">
+               <div th:if='${#httpServletRequest.remoteUser != null}' th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
+                  Logged in user: <b th:inline="text"  class="user"> 
+                  [[${#httpServletRequest.remoteUser}]] </b>
+                  <form action="#" th:action="@{/logout}" method="post">					
+                     <input type="submit" value="Logout" class = "btn btn-submit"/>
+                  </form>
+               </div>
+               <div th:if='${#httpServletRequest.remoteUser == null}'>
+                  <form action="#" th:action="@{/login}" method="get">					
+                     <input type="submit" value="Login" class = "btn btn-submit"/>
+                  </form>
+               </div>
+            </div>
+         </div>
+         
+         
+         <div class ="table-responsive">
+            <table class="table table-striped">
+               <thead>
+                  <tr>
+                     <th> # </th>
+                     <th>Category</th>
+                     <th>Content</th>
+                     <th> Likes </th>
+                     <th> Dislikes </th>
+                     <th> Difference </th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr th:each="joke, rows : ${pageWrapper.page}">
+                     <td th:text="${pageWrapper.number * 10 + rows.index + 1}"/>
+                     <td th:text="${joke.category.name}"/>
+                     <td th:text="${joke.content}"/>
+                     <td th:text="${joke.likes}"/>
+                     <td th:text="${joke.dislikes}"/>
+                     <td th:text="${joke.likes - joke.dislikes}"/>
+                     <td>
+                        <a href="/like/1" th:href="@{/like/__${joke.id}__}">Like</a>
                         <a href="/dislike/1" th:href="@{/dislike/__${joke.id}__}">Dislike</a>
                      </td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <h2><a href="/new">Add new joke</a></h2>
-     </div>
- <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
- </div>
-</body>
+                  </tr>
+               </tbody>
+            </table>
+            
+            
+            <div class = "text-center">
+               <ul class = "pagination">
+                  <li th:class= "${pageWrapper.hasPreviousPage} ? '' : 'disabled' ">
+                     <span th:if='${not pageWrapper.hasPreviousPage}'>«</span>
+                     <a th:if='${pageWrapper.hasPreviousPage}' th:href='@{${pageWrapper.url}(page=${pageWrapper.number-1})}' title='Previous'>«</a>
+                  </li>
+                  <li th:class=" ${item.current} ? 'active' : ''" th:each='item : ${pageWrapper.pages}'>
+                     <span th:if='${item.current}' th:text='${item.pageNumber}'>1</span>
+                     <a th:if='${not item.current}' th:href='@{${pageWrapper.url}(page=${item.pageNumber-1})}'><span th:text='${item.pageNumber}'>1</span></a>
+                  </li>
+                  <li th:class= "${pageWrapper.hasNextPage} ? '' : 'disabled'">
+                     <span th:if='${not pageWrapper.hasNextPage}'>»</span>
+                     <a th:if='${pageWrapper.hasNextPage}' th:href='@{${pageWrapper.url}(page=${pageWrapper.number+1})}' title='Next'> » </a>
+                  </li>
+               </ul>
+            </div>
+            
+         </div>
+      </div>
+      
+      
+      <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      </div>
+   </body>
 </html>
